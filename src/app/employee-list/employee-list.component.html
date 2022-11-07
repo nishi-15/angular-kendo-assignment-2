@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+<div class="container">
+  <kendo-grid
+      [kendoGridReactiveEditing]="createFormGroup"
+      [kendoGridBinding]="allEmployeeDetails"
+      [pageSize]="10"
+      [pageable]="true"
+      [sortable]="true"
+      [filterable]="true"
+      [height]="420">
+      <ng-template kendoGridToolbarTemplate>
+        <button kendoGridAddCommand>Add Employee</button>
+      </ng-template>
+
+      <kendo-grid-column field="employeeId" [width]="140"></kendo-grid-column>
+      <kendo-grid-column field="firstName" [width]="120"></kendo-grid-column>
+      <kendo-grid-column field="lastName" [width]="100"></kendo-grid-column>
+      <kendo-grid-column field="email" [width]="130"></kendo-grid-column>
+      <kendo-grid-column field="contactNumber" [width]="130"></kendo-grid-column>
+      <kendo-grid-command-column title="command" [width]="220">
+        <ng-template kendoGridCellTemplate let-isNew="isNew">
+          <button kendoGridEditCommand [primary]="true">Edit</button>
+          <button kendoGridRemoveCommand>Remove</button>
+          <button kendoGridSaveCommand [disabled]="!formGroup?.valid">
+            {{ isNew ? "Add" : "Update" }}
+          </button>
+          <button kendoGridCancelCommand>
+            {{ isNew ? "Discard changes" : "Cancel" }}
+          </button>
+        </ng-template>
+      </kendo-grid-command-column>
+    </kendo-grid>
+
+
+  <!-- <table class="table table-responsive">
+    <thead>
+      <tr>
+        <th>Employee Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Contact Number</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of allEmployeeDetails">
+        <td scope="row">{{employee.employeeId}}</td>
+        <td>{{employee.firstName}}</td>
+        <td>{{employee.lastName}}</td>
+        <td>{{employee.email}}</td>
+        <td>{{employee.contactNumber}}</td>
+        <td>
+          <button kendoButton type="button" class="btn btn-info" [routerLink]="['/editEmployee/'+employee.employeeId]">Edit</button>
+          <button kendoButton type="button" class="btn btn-danger" (click)="deleteEmployee(employee)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+</div>
